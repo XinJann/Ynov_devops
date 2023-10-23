@@ -13,6 +13,7 @@ async fn ping(req: HttpRequest) -> impl Responder {
     json_string.pop();
     json_string.push_str("}");
 
+    println!("ENV c'est pas équivalent à export ENV=blalb :))))))");
     HttpResponse::Ok().
         content_type(ContentType::json()).
         body(json_string)
@@ -26,11 +27,12 @@ async fn main() -> std::io::Result<()> {
         let temp: String = env::var(key).unwrap();
         listen_port = temp.parse().unwrap();
     }
+
     HttpServer::new(|| {
         App::new()
             .service(ping)
     })
-    .bind(("127.0.0.1", listen_port))?
+    .bind(("0.0.0.0", listen_port))?
     .run()
     .await
 }
