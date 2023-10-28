@@ -21,7 +21,7 @@ Le Dockerfile en question [ici](/WIK-DPS-TP02/Dockerfile_2_stages/Dockerfile). A
 # Procedure d'utilisation
 
 - Télécharger le repo
-- déplacer le Dockerfile voulu dans "WIK-DPS-TP01/"
+- déplacer le Dockerfile voulu dans "[WIK-DPS-TP01/](/WIK-DPS-TP01/)"
 - executer le Dockerfile
 ```
 cd WIK-DPS-TP01/
