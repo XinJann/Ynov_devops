@@ -8,9 +8,22 @@ Le Dockerfile en question [ici](/WIK-DPS-TP02/Dockerfile_1_stage/Dockerfile). Co
 
 ### Fonctionnalité : 
 - crée une image docker qui execute l'API rust lors du RUN
-- ne re-télécharge ni ne re-compile les dépendances lors d'un simple changement dans le code du projet.  
+- ne re-télécharge ni ne re-compile les dépendances lors d'un changement dans le code du projet.  
 - lance l'API rust avec un user != root
 
 # Dockerfile en 2 stage
 
-Le Dockerfile en question [ici](/WIK-DPS-TP02/Dockerfile_2_stages/Dockerfile). Comme demandé, il y a 2 stage
+Le Dockerfile en question [ici](/WIK-DPS-TP02/Dockerfile_2_stages/Dockerfile). Avec les même fonctionnalités que le Dockerfile précédent mais composé de 2 stages.  
+- Le premier stage pour build.  
+- Le deuxième stage pour seulement contenir l'executable qui a été build.
+
+
+# Procedure d'utilisation
+
+- Télécharger le repo
+- déplacer le Dockerfile voulu dans "WIK-DPS-TP01/"
+- executer le Dockerfile
+```
+cd WIK-DPS-TP01/
+docker build -t container_name .
+```
