@@ -27,3 +27,7 @@ Le Dockerfile en question [ici](/WIK-DPS-TP02/Dockerfile_2_stages/Dockerfile). A
 cd WIK-DPS-TP01/
 docker build -t container_name .
 ```
+puis pour lancer le conteneur et y accéder depuis le port 8080
+```
+docker run -it -p 8080:8080 container_name
+```
