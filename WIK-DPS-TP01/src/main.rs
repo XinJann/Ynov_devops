@@ -1,5 +1,6 @@
 use actix_web::{get, App, HttpResponse, HttpServer, Responder, HttpRequest};
 use actix_web::http::header::ContentType;
+use gethostname::gethostname;
 use std::env;
 
 #[get("/ping")]
@@ -13,7 +14,7 @@ async fn ping(req: HttpRequest) -> impl Responder {
     json_string.pop();
     json_string.push_str("}");
 
-    println!("ENV c'est pas équivalent à export ENV=blalb :))))))");
+    println!("Hostname: {:?}", gethostname());
     HttpResponse::Ok().
         content_type(ContentType::json()).
         body(json_string)
