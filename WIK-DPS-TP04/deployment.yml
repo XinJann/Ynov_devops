@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-deployment
+  namespace: echo
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      tier: echos
+  template:
+    metadata:
+      labels:
+        tier: echos
+    spec:
+      containers:
+      - name: echo
+        image: registry.cluster.wik.cloud/public/echo
+        ports:
+        - containerPort: 8080
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: "50%"
