@@ -1,0 +1,62 @@
+# https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
+# La logique , 3 deployments (db, wordpress, cache), 3 services (pour joindre les deployments), ingress (dans le même namespace que les autres)
+
+
+# Le bonus n'est pas 100% fonctionnelle
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-mysql
+  namespace: tp-bonus
+  labels:
+    app: wordpress
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: wordpress
+    tier: mysql
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-mysql
+  labels:
+    app: wordpress
+spec:
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: mysql
+    spec:
+      containers:
+      - image: mysql:8.0
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+          #valueFrom:
+            #secretKeyRef:
+            #  name: mysql-pass
+            #  key: password
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_USER
+          value: wordpress
+        - name: MYSQL_PASSWORD
+          value: root
+          #valueFrom:
+          #  secretKeyRef:
+          #    name: mysql-pass
+          #    key: password
+        ports:
+        - containerPort: 3306
+          name: mysql
